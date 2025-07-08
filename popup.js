@@ -32,11 +32,18 @@ function showImages(images) {
   const imageCards = images.map((img) => new ImageCard(img));
   imageCards.forEach((img) => imagesGrid.append(img));
 
-  /** @type {HTMLInputElement} */
-  const selectAll = document.querySelector(
-    ".popup-wrapper header .actions input",
+  /** @type {HTMLButtonElement} */
+  const downloadButton = document.querySelector(
+    ".popup-wrapper header .actions button",
   );
-  selectAll.removeAttribute("disabled");
+
+  downloadButton.innerText = "Download all images";
+
+  /** @type {HTMLInputElement} */
+  // const selectAll = document.querySelector(
+  //   ".popup-wrapper header .actions input",
+  // );
+  // selectAll.removeAttribute("disabled");
 }
 
 const state = new Store({
@@ -59,10 +66,14 @@ const actionHeader = document.querySelector(".popup-wrapper .actions");
 const actionButton = actionHeader.querySelector("button");
 
 actionButton.addEventListener("click", () => {
-  state.setState({ status: "loading" });
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    tabs.forEach((t) => chrome.tabs.sendMessage(t.id, { type: "GET_IMAGES" }));
-  });
+  if (state.state.status === "pending") {
+    state.setState({ status: "loading" });
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      tabs.forEach((t) =>
+        chrome.tabs.sendMessage(t.id, { type: "GET_IMAGES" }),
+      );
+    });
+  } else return;
 });
 
 chrome.runtime.onMessage.addListener((message) => {
