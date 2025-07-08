@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemastore.org/chrome-manifest",
+	"manifest_version": 3,
+	"name": "HarvestPix",
+	"description": "Download all the images on an open webpage in seconds.",
+	"version": "0.0.1",
+	"action": {
+		"default_icon": {},
+		"default_title": "HarvestPix - Download images in seconds.",
+		"default_popup": "ui/popup.html"
+	},
+	"permissions": [
+		"activeTab",
+		"scripting",
+		"downloads"
+	],
+	"background": {},
+	"content_scripts": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"js": [
+				"scripts/content.js"
+			]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"resources": [
+				"scripts/imageScraper.js"
+			]
+		}
+	]
+}

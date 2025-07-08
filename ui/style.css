@@ -1,0 +1,73 @@
+@import "./global.css";
+
+html,
+body {
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 720px;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.popup-wrapper {
+  background-color: transparent;
+  padding: 1rem;
+  overflow: auto;
+  margin: auto;
+  padding-bottom: 4rem;
+}
+
+.popup-wrapper header {
+  margin-bottom: 1rem;
+
+  h1 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .actions {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 19rem;
+
+    button {
+      max-width: fit-content;
+    }
+  }
+}
+
+#images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+
+  & > span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.popup-wrapper > footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  height: 3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: #efefef;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+}

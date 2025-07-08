@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarvestPix Extension</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="popup-wrapper">
+      <header>
+        <h1>HarvestPix</h1>
+
+        <div class="actions">
+          <label for="select-all">
+            <input id="select-all" type="checkbox" />
+            <span>Select all</span>
+          </label>
+
+          <button>Download all</button>
+        </div>
+      </header>
+
+      <div id="images-grid">
+        <!-- <span>No images found.</span> -->
+        <image-card></image-card>
+        <image-card></image-card>
+        <image-card></image-card>
+        <!-- <image-card></image-card> -->
+        <!-- <image-card></image-card> -->
+      </div>
+
+      <footer>
+        <span>
+          Powered by
+          <a href="https://victormaina.com/" target="_blank">victormaina.com</a>
+        </span>
+      </footer>
+    </div>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

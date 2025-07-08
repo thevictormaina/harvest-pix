@@ -1,0 +1,10 @@
+{
+	"name": "HarvestPix Extension",
+	"version": "0.0.1",
+	"description": "Download all the images on an open webpage in seconds.",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Victor K. Maina",
+	"packageManager": "pnpm@10.12.4"
+}
