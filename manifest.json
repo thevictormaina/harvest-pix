@@ -6,22 +6,24 @@
 	"version": "0.0.1",
 	"action": {
 		"default_icon": {},
-		"default_title": "HarvestPix - Download images in seconds.",
-		"default_popup": "ui/popup.html"
+		"default_title": "HarvestPix - Download images in seconds."
 	},
 	"permissions": [
 		"activeTab",
 		"scripting",
 		"downloads"
 	],
-	"background": {},
+	"background": {
+		"type": "module",
+		"service_worker": "background.js"
+	},
 	"content_scripts": [
 		{
+			"js": [
+				"content.js"
+			],
 			"matches": [
 				"<all_urls>"
-			],
-			"js": [
-				"scripts/content.js"
 			]
 		}
 	],
@@ -31,7 +33,7 @@
 				"<all_urls>"
 			],
 			"resources": [
-				"scripts/imageScraper.js"
+				"lib/*"
 			]
 		}
 	]

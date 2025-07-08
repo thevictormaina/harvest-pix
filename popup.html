@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HarvestPix Extension</title>
-    <link href="style.css" rel="stylesheet" />
+    <link href="popup.css" rel="stylesheet" />
   </head>
   <body>
     <div class="popup-wrapper">
@@ -13,21 +13,16 @@
 
         <div class="actions">
           <label for="select-all">
-            <input id="select-all" type="checkbox" />
+            <input id="select-all" type="checkbox" disabled />
             <span>Select all</span>
           </label>
 
-          <button>Download all</button>
+          <button>Get all images</button>
         </div>
       </header>
 
       <div id="images-grid">
-        <!-- <span>No images found.</span> -->
-        <image-card></image-card>
-        <image-card></image-card>
-        <image-card></image-card>
-        <!-- <image-card></image-card> -->
-        <!-- <image-card></image-card> -->
+        <span>Click "Get all images" to begin.</span>
       </div>
 
       <footer>
@@ -38,6 +33,6 @@
       </footer>
     </div>
 
-    <script src="script.js" type="module"></script>
+    <script src="popup.js" type="module"></script>
   </body>
 </html>

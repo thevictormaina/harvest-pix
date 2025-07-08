@@ -1,3 +1,4 @@
 .env*
 *.pem
 Session.vim
+node_modules
