@@ -1,16 +1,12 @@
-const templateCache = new Map();
+const templateCache = new Map<string, DocumentFragment>();
 
-/**
- * @param {string} filename
- * @param {string} basePath
- */
 export async function loadComponentTemplate(
-  filename,
-  basePath = "components/",
+  filename: string,
+  basePath: string = "components/",
 ) {
   const path = `${basePath}${filename}`;
   if (templateCache.has(path)) {
-    return templateCache.get(path).cloneNode(true);
+    return templateCache.get(path)?.cloneNode(true);
   }
 
   if (

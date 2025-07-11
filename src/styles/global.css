@@ -4,7 +4,7 @@
   box-sizing: border-box;
   border: none;
   outline: none;
-  background-color: none;
+  background-color: transparent;
   font-size: 1em;
 }
 

@@ -5,13 +5,18 @@ export class WebComponent extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.constructor.template) {
-      const fragment = this.constructor.template.content.cloneNode(true);
+    const constructor = this.constructor as typeof WebComponent;
+
+    if (!this.shadowRoot) return;
+
+    if (constructor.template) {
+      const fragment = constructor.template.content.cloneNode(true);
       this.shadowRoot.append(fragment);
+      console.log(fragment);
     }
 
-    if (this.constructor.stylesheets?.length > 0) {
-      this.shadowRoot.adoptedStyleSheets = this.constructor.stylesheets;
+    if (constructor.stylesheets?.length > 0) {
+      this.shadowRoot.adoptedStyleSheets = constructor.stylesheets;
     }
 
     this.connectedMoveCallback();
@@ -34,26 +39,23 @@ export class WebComponent extends HTMLElement {
    * Called when one of the observed attributes changes.
    * Subclasses should define `static get observedAttributes() { return [...] }`
    */
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     // Override in subclasses to react to attribute changes
   }
 
-  /** @type {string} */
-  static registeredName;
+  static registeredName: string;
 
-  /** @type {HTMLTemplateElement} */
-  static template;
+  static template: HTMLTemplateElement;
 
-  /** @type {CSSStyleSheet[]} */
-  static stylesheets = [];
+  static stylesheets: CSSStyleSheet[] = [];
 
   /**
    * Get the contents of a file.
-   * @param {string} path
-   * @param {boolean} required - `true` by default
-   * @returns {Promise<string|null>}
    */
-  static async getFile(path, required = true) {
+  static async getFile(
+    path: string,
+    required: boolean = true,
+  ): Promise<string | null> {
     try {
       const res = await fetch(path);
       if (!res.ok) {
@@ -69,11 +71,11 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Get the contents of a template file
-   * @param {string} fileName - Must be a `*.component.html` file.
-   * @param {string} basePath
-   * @returns {Promise<void>}
    */
-  static async loadTemplate(fileName, basePath = "components/") {
+  static async loadTemplate(
+    fileName: string,
+    basePath: string = "components/",
+  ): Promise<void> {
     if (
       typeof fileName !== "string" ||
       !/^[\w/-]+\.component\.html$/.test(fileName)
@@ -83,17 +85,18 @@ export class WebComponent extends HTMLElement {
 
     const html = await this.getFile(`${basePath}${fileName}`);
     const template = document.createElement("template");
+    if (!template || !html) return;
     template.innerHTML = html;
     this.template = template;
   }
 
   /**
    * Get the contents of a stylesheet
-   * @param {string} fileName - Must be a `*.component.css` file.
-   * @param {string} basePath
-   * @returns {Promise<void>}
    */
-  static async loadStyleSheet(fileName, basePath = "components/") {
+  static async loadStyleSheet(
+    fileName: string,
+    basePath: string = "components/",
+  ): Promise<void> {
     if (
       typeof fileName !== "string" ||
       !/^[\w/-]+\.component\.css$/.test(fileName)
@@ -101,7 +104,7 @@ export class WebComponent extends HTMLElement {
       throw new Error(`Invalid stylesheet file name: ${fileName}`);
     }
 
-    const globalCss = await this.getFile("global.css", false);
+    const globalCss = await this.getFile("styles/global.css", false);
     if (globalCss) {
       const globalSheet = new CSSStyleSheet();
       await globalSheet.replace(globalCss);
@@ -119,10 +122,8 @@ export class WebComponent extends HTMLElement {
   /**
    * Loads and caches the component's template and stylesheet
    * based on its static `registeredName`.
-   * @param {string} basePath - Relative path to component files (default: "components/")
-   * @returns {Promise<void>}
    */
-  static async initialize(basePath = "components/") {
+  static async initialize(basePath: string = "components/"): Promise<void> {
     if (!this.registeredName) {
       throw new Error(
         `${this.name}.registeredName must be set before calling initialize().`,

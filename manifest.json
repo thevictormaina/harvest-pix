@@ -33,7 +33,7 @@
 				"<all_urls>"
 			],
 			"resources": [
-				"lib/*"
+				"*"
 			]
 		}
 	]

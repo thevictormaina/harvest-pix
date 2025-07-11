@@ -1,0 +1,10 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig.json",
+	"compilerOptions": {
+		"target": "es6",
+		"types": [
+			"chrome-types"
+		],
+		"moduleResolution": "nodenext"
+	},
+}

@@ -3,11 +3,20 @@
 	"version": "0.0.1",
 	"description": "Download all the images on an open webpage in seconds.",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "rm -rf dist && rolldown -c rolldown.config.ts",
+		"watch": "rm -rf dist && rolldown -c rolldown.config.ts --watch"
 	},
 	"author": "Victor K. Maina",
 	"packageManager": "pnpm@10.12.4",
 	"dependencies": {
-		"chrome-types": "^0.1.360"
+		"fflate": "^0.8.2"
+	},
+	"devDependencies": {
+		"@types/node": "^24.0.12",
+		"chrome-types": "^0.1.360",
+		"glob": "^11.0.3",
+		"rolldown": "1.0.0-beta.25",
+		"rollup-plugin-copy": "^3.5.0"
 	}
 }

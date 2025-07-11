@@ -1,0 +1,10 @@
+session_name: New Session
+windows:
+- focus: 'true'
+  layout: c0ff,174x40,0,0[174x29,0,0,2,174x10,0,30,1]
+  options: {}
+  panes:
+  - nvim
+  - pnpm watch
+  start_directory: /home/thevictormaina/Projects/harvest-pix
+  window_name: main
